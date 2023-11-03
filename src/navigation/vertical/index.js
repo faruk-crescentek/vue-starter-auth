@@ -5,8 +5,8 @@ export default [
     icon: { icon: 'tabler-smart-home' },
   },
   {
-    title: 'Second page',
-    to: { name: 'second-page' },
-    icon: { icon: 'tabler-file' },
+    title: 'Users',
+    to: { name: 'users-list' },
+    icon: { icon: 'fa:user' },
   },
 ]
