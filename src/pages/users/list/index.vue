@@ -1,3 +1,23 @@
+<script setup>
+import axios from '@axios';
+import { onMounted } from 'vue';
+
+const users = ref([]);
+
+const getUsers = async () => {
+  await axios.get('/users').then(r => {
+    users.value = r.data.users;
+
+  }).catch(e => {
+    console.log(e);
+  })
+}
+
+onMounted(getUsers)
+
+</script>
+
+
 <template>
   <div>
     <VCard class="mb-6">
@@ -30,25 +50,3 @@
     </VCard>
   </div>
 </template>
-
-
-
-<script setup>
-import axios from '@axios';
-import { onMounted } from 'vue';
-
-const users = ref([]);
-
-const getUsers = async () => {
-  await axios.get('/users').then(r => {
-    users.value = r.data.users;
-
-    console.log(users);
-  }).catch(e => {
-    console.log(e);
-  })
-}
-
-onMounted(getUsers)
-
-</script>

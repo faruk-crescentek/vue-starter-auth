@@ -9,4 +9,9 @@ export default [
     to: { name: 'users-list' },
     icon: { icon: 'fa:user' },
   },
+  {
+    title: 'Categories',
+    to: { name: 'categories-list' },
+    icon: { icon: 'fa:list-alt' },
+  },
 ]
