@@ -1,11 +1,12 @@
 <script setup>
 
-import axios from '@axios';
 import { requiredValidator } from '@validators';
 import { onMounted } from 'vue';
 import { useToast } from "vue-toastification";
 import { VForm } from 'vuetify/components/VForm';
+import { useCategoryStore } from '../useCategoryStore';
 
+const categoryStore = useCategoryStore()
 const route = useRoute()
 const router = useRouter()
 const toast = useToast()
@@ -18,7 +19,8 @@ const refVForm = ref()
 const name = ref('')
 
 const updateCategory = () => {
-  axios.put(`/categories/${route.params.id}`, {
+
+  categoryStore.updateCategory(route.params.id, {
     name: name.value,
   }).then(r => {
 
@@ -39,7 +41,7 @@ const onSubmit = () => {
 }
 
 const getCategory = () => {
-  axios.get(`/categories/${route.params.id}`).then(r => {
+  categoryStore.fetchCategory(route.params.id).then(r => {
 
     name.value = r.data.category.name
 

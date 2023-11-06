@@ -1,5 +1,5 @@
-import axios from '@axios'
-import { defineStore } from 'pinia'
+import axios from '@axios';
+import { defineStore } from 'pinia';
 
 export const useCategoryStore = defineStore('CategoryStore', {
   actions: {
@@ -7,12 +7,13 @@ export const useCategoryStore = defineStore('CategoryStore', {
     fetchCategories(params) { return axios.get('/categories', { params }) },
 
     // 👉 Add Category
-    addCategory(userData) {
+    addCategory(data) {
       return new Promise((resolve, reject) => {
         axios.post('/categories', {
-          user: userData,
-        }).then(response => resolve(response))
-          .catch(error => reject(error))
+          name: data.name
+        })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
       })
     },
 
@@ -21,6 +22,17 @@ export const useCategoryStore = defineStore('CategoryStore', {
       return new Promise((resolve, reject) => {
         axios.get(`/categories/${id}`).then(response => resolve(response)).catch(error => reject(error))
       })
+    },
+
+    // 👉 update single category
+    updateCategory(id, data) {
+        return new Promise((resolve, reject) => {
+            axios.put(`/categories/${id}`, {
+                name: data.name
+            })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        })
     },
 
     // 👉 Delete Category

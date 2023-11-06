@@ -1,10 +1,11 @@
 <script setup>
 
-import axios from '@axios';
 import { requiredValidator } from '@validators';
 import { useToast } from "vue-toastification";
 import { VForm } from 'vuetify/components/VForm';
+import { useCategoryStore } from '../useCategoryStore';
 
+const categoryStore = useCategoryStore()
 const route = useRoute()
 const router = useRouter()
 const toast = useToast()
@@ -18,7 +19,7 @@ const name = ref('')
 
 const saveCategory = () => {
 
-  axios.post('/categories', {
+  categoryStore.addCategory({
     name: name.value,
   }).then(r => {
 
@@ -28,7 +29,7 @@ const saveCategory = () => {
 
     const { errors: formErrors } = e.response.data
     errors.value = formErrors
-  })
+  });
 }
 
 const onSubmit = () => {
